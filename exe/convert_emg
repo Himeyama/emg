@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+require "pstore"
+
+if ARGV.size != 1
+    STDERR.puts "使用法: #{$0} ファイル"
+    exit false
+end
+
+filename = ARGV[0]
+unless File.exist? filename
+    STDERR.puts "ファイルが存在しません"
+    exit false
+end
+
+ary = []
+i = -1
+basename = File.basename filename, ".csv"
+open filename, encoding: "CP932:UTF-8" do |f|
+    f.each_line do |line|
+        data = line.chop.split(",").map(&:to_f)
+        ary[i+=1] = data if data.size == 17
+    end
+end
+ary.shift
+
+db = PStore.new basename + ".pstore"
+db.transaction do
+    root = db["root"] = []
+    ary.each_index do |i|
+        root[i] = ary[i]
+    end
+end
