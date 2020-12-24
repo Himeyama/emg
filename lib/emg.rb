@@ -1,6 +1,5 @@
 require "emg/version"
 require "pstore"
-
 require "numo/narray"
 
 module Emg
@@ -17,8 +16,9 @@ module Emg
                 self["root"]
             end
         end
+
+        def to_na
+            Numo::DFloat[*to_a]
+        end
     end
 end
-
-# db = EMG::open("test.pstore")
-# db.to_a

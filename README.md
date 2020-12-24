@@ -32,7 +32,8 @@ require "emg"
 include Emg
 
 a = EMG.assign "***.pstore"
-a.to_a
+a.to_a # Array
+a.to_na # DFloat (Numo-NArray)
 ```
 
 ## 開発
