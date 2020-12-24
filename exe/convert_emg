@@ -27,6 +27,6 @@ db = PStore.new basename + ".pstore"
 db.transaction do
     root = db["root"] = []
     ary.each_index do |i|
-        root[i] = ary[i]
+        root[i] = ary[i][1..-1]
     end
 end
