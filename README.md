@@ -19,10 +19,20 @@ gem "emg", github: "himeyama/emg", branch: :main
 
 ## コマンド
 ```sh
+convert_emg ファイル名
+convert_emgs ディレクトリ名
 ```
 
 ## Ruby で使う
 ```ruby
+#!/usr/bin/env ruby
+require "bundler"
+Bundler.require
+require "emg"
+include Emg
+
+a = EMG.assign "***.pstore"
+a.to_a
 ```
 
 ## 開発
