@@ -28,6 +28,7 @@ PLATFORMS
 DEPENDENCIES
   emg!
   numo
+  numo-linalg
   numo-narray
   rake (~> 12.0)
 
