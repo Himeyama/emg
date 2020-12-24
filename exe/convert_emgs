@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+if ARGV.size != 1
+    STDERR.puts "使用法: #{$0} ディレクトリー"
+    exit false
+end
+
+dirname = ARGV[0]
+unless Dir.exist? dirname
+    STDERR.puts "ファイルが存在しません"
+    exit false
+end
+
+threads = []
+files = Dir.glob("#{dirname}#{dirname[-1] != "/" ? "/" : ""}*.csv")
+files.each do |filename|
+    threads.push Thread.new{
+        system "convert_emg #{filename}"
+    }
+end
+
+threads.each.with_index do |t, i|
+    puts "#{t.value ? "完了": "失敗"}: #{files[i]}"
+end
