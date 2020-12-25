@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+require "pstore"
+
+if ARGV.size != 1
+    STDERR.puts "使用法: #{$0} ファイル"
+    exit false
+end
+
+filename = ARGV[0]
+unless File.exist? filename
+    STDERR.puts "ファイルが存在しません"
+    exit false
+end
+
+ary = nil
+db = PStore.new filename
+db.transaction do
+    ary = db["root"]
+end
+
+ary.each do |r|
+    puts r.join(",")
+end
