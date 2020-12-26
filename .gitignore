@@ -6,3 +6,5 @@
 /pkg/
 /spec/reports/
 /tmp/
+/exe/__pycache__/
+/exe/.ipynb_checkpoints/
